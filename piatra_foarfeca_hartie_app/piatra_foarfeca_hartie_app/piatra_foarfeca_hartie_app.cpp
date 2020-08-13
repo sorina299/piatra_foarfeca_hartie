@@ -9,23 +9,23 @@
 #define PAPER 3
 
 #ifdef _WIN32
-	#define CLEAR_SCREEN "cls"
+#define CLEAR_SCREEN "cls"
 #else
-	#define CLEAR_SCREEN "clear"
+#define CLEAR_SCREEN "clear"
 #endif
 
 
 void word_print(int word) {
 	if (word == ROCK) {
-		printf("Rock\n");
+		printf("\033[0;31mRock\n\033[0m\n");
 	}
 
 	if (word == SCISSOR) {
-		printf("Scissor\n");
+		printf("\033[0;33mScissor\n\033[0m\n");
 	}
 
 	if (word == PAPER) {
-		printf("Paper\n");
+		printf("\033[0;34mPaper\n\033[0m\n");
 	}
 }
 
@@ -64,10 +64,10 @@ int game_win(int player1, int player2) {
 }
 
 void score_print(int user_score, int computer_score) {
-	printf("---------------------\n");
-	printf("User score: %d\n", user_score);
-	printf("Computer score: %d\n", computer_score);
-	printf("---------------------\n\n");
+	printf("\033[0;36m---------------------\n\033[0m");
+	printf("\033[1;36mUser score: %d\n\033[0m", user_score);
+	printf("\033[1;36mComputer score: %d\n\033[0m", computer_score);
+	printf("\033[0;36m---------------------\n\n\033[0m");
 }
 
 void game_play() {
@@ -79,48 +79,45 @@ void game_play() {
 	while (1) {
 		int user_choice;
 		score_print(user_score, computer_score);
-		
-		printf("1 - Rock\n2 - Scissor\n3 - Paper\n\nChoose [1, 2, 3]:  ");
+		printf("\033[0;31m1 - Rock\n\033[0m\033[0;33m2 - Scissor\n\033[0m\033[0;34m3 - Paper\n\n\033[0m\033[1;32mChoose 1, 2 or 3:  \033[0m");
 		scanf("%d", &user_choice);
 
-		int computer_choice = (rand() % 3) + 1;
 		system(CLEAR_SCREEN);
-		printf("Computer chose: ");
+		int computer_choice = (rand() % 3) + 1;
+		printf("\033[1;32mComputer chose: \033[0m");
 		word_print(computer_choice);
-		printf("User chose: ");
+		printf("\033[1;35mUser chose: \033[0m");
 		word_print(user_choice);
 
 		if (game_win(user_choice, computer_choice) == 1) {
 			user_score++;
-			printf("User wins this round\n\n");
+			printf("\033[1;35mUser wins this round\n\n\033[0m");
 			turn++;
 		}
-		
+
 		if (game_win(user_choice, computer_choice) == 2) {
 			computer_score++;
-			//score_print(user_score, computer_score);
-			printf("Computer wins this round\n\n");
+			printf("\033[1;32mComputer wins this round\n\n\033[0m");
 			turn++;
 		}
 
 		if (game_win(user_choice, computer_choice) == 0) {
-			//score_print(user_score, computer_score);
 			printf("It is a draw\n\n");
 			turn++;
 		}
 
-		if (turn == 10) {
+		if (turn == 5) {
 			if (computer_score < user_score) {
 				system(CLEAR_SCREEN);
 				score_print(user_score, computer_score);
-				printf("User wins the game\n\n");
+				printf("\033[1;35mUser wins the game\n\n\033[0m");
 				return;
 			}
 			else {
 				if (computer_score > user_score) {
 					system(CLEAR_SCREEN);
 					score_print(user_score, computer_score);
-					printf("Computer wins the game\n\n");
+					printf("\033[1;32mComputer wins the game\n\n\033[0m");
 					return;
 				}
 				else {
