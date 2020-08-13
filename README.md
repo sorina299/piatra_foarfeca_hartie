@@ -1,0 +1,1 @@
+# piatra_foarfeca_hartie
