@@ -64,10 +64,10 @@ int game_win(int player1, int player2) {
 }
 
 void score_print(int user_score, int computer_score) {
-	printf("\033[0;36m---------------------\n\033[0m");
-	printf("\033[1;36mUser score: %d\n\033[0m", user_score);
-	printf("\033[1;36mComputer score: %d\n\033[0m", computer_score);
-	printf("\033[0;36m---------------------\n\n\033[0m");
+	printf("\033[0;36m* * * * * * * * * * * *\n\033[0m");
+	printf("\033[0;36m*  User score: %d      *\n\033[0m", user_score);
+	printf("\033[0;36m*  Computer score: %d  *\n\033[0m", computer_score);
+	printf("\033[0;36m* * * * * * * * * * * *\n\n\033[0m");
 }
 
 void game_play() {
@@ -79,7 +79,7 @@ void game_play() {
 	while (1) {
 		score_print(user_score, computer_score);
 		int user_choice;
-		printf("\033[0;31m1 - Rock\n\033[0m\033[0;33m2 - Scissor\n\033[0m\033[0;34m3 - Paper\n\n\033[0m\033[1;32mChoose 1, 2 or 3:  \033[0m");
+		printf("\033[0;31m1 - Rock\n\033[0m\033[0;33m2 - Scissor\n\033[0m\033[0;34m3 - Paper\n\n\033[0m\033[1;32mChoose 1, 2 or 3: \033[0m");
 		scanf("%d", &user_choice);
 		do {
 			if (user_choice < 1 || user_choice > 3) {
