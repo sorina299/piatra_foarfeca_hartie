@@ -77,10 +77,16 @@ void game_play() {
 	int turn = 1;
 
 	while (1) {
-		int user_choice;
 		score_print(user_score, computer_score);
+		int user_choice;
 		printf("\033[0;31m1 - Rock\n\033[0m\033[0;33m2 - Scissor\n\033[0m\033[0;34m3 - Paper\n\n\033[0m\033[1;32mChoose 1, 2 or 3:  \033[0m");
 		scanf("%d", &user_choice);
+		do {
+			if (user_choice < 1 || user_choice > 3) {
+				printf("\033[1;32mYou are out of range, try again. Choose 1, 2 or 3: \033[0m");
+				scanf("%d", &user_choice);
+			}
+		} while (user_choice < 1 || user_choice > 3);
 
 		system(CLEAR_SCREEN);
 		int computer_choice = (rand() % 3) + 1;
@@ -106,7 +112,7 @@ void game_play() {
 			turn++;
 		}
 
-		if (turn == 5) {
+		if (turn == 8) {
 			if (computer_score < user_score) {
 				system(CLEAR_SCREEN);
 				score_print(user_score, computer_score);
